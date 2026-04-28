@@ -1,0 +1,90 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API de Personagens",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Lista todos os personagens",
+        "responses": {
+          "200": { "description": "Lista de personagens" },
+          "500": { "description": "Erro interno do servidor" }
+        }
+      },
+      "post": {
+        "summary": "Cria um novo personagem",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["nome", "time", "posição"],
+              "properties": {
+                "nome": { "type": "string" },
+                "time": { "type": "string" },
+                "posição": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Personagem criado com sucesso" },
+          "400": { "description": "Dados inválidos" },
+          "500": { "description": "Erro interno do servidor" }
+        }
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "summary": "Atualiza um personagem pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": { "type": "string" },
+                "time": { "type": "string" },
+                "posição": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Personagem atualizado com sucesso" },
+          "400": { "description": "Nome já está em uso" },
+          "404": { "description": "Personagem não encontrado" },
+          "500": { "description": "Erro interno do servidor" }
+        }
+      },
+      "delete": {
+        "summary": "Deleta um personagem pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Personagem deletado com sucesso" },
+          "404": { "description": "Personagem não encontrado" },
+          "500": { "description": "Erro interno do servidor" }
+        }
+      }
+    }
+  }
+}
